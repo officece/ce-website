@@ -19,7 +19,7 @@ const Events = () => {
       venue: '1D-105, IIT Indore Campus',
       category: 'Seminar',
       // Note: Make sure to save the image you uploaded as 'steel_seminar.jpeg' in your assets folder
-      image: '/assets/Events/steel_seminar.jpeg', 
+      image: '/assets/Events/steel.jpg', 
       registrationLink: 'https://docs.google.com/forms/d/1oTXpXYolZUIVl8vKsj0q_HRgBIjvkn-NXKQ5Nc4qKCQ/edit?ts=69390ad1&pli=1' 
     }
   ];
