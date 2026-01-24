@@ -9,19 +9,9 @@ const Events = () => {
 
   // --- Data Section ---
 
-  // 1. Upcoming Events Data (Extracted from your image)
+  // 1. Upcoming Events Data 
   const upcomingEvents = [
-    {
-      date: '2026-01-22',
-      title: 'REIMAGINING CONSTRUCTION PARADIGMS: STEEL FOR THE NEXT GENERATION',
-      description: 'The Indian Institute of Technology Indore (IITI), in association with the Institute for Steel Development and Growth (INSDAG), is pleased to invite students, researchers, faculty members, and industry professionals to a one-day Technical Seminar.',
-      time: '09:00 AM - 05:00 PM',
-      venue: '1D-105, IIT Indore Campus',
-      category: 'Seminar',
-      // Note: Make sure to save the image you uploaded as 'steel_seminar.jpeg' in your assets folder
-      image: '/assets/Events/steel.jpg', 
-      registrationLink: 'https://docs.google.com/forms/d/1oTXpXYolZUIVl8vKsj0q_HRgBIjvkn-NXKQ5Nc4qKCQ/edit?ts=69390ad1&pli=1' 
-    }
+   
   ];
 
   // 2. News Data (From your previous code)
@@ -129,7 +119,25 @@ const Events = () => {
     }
   ];
 
-  const pastEvents = []; 
+  const pastEvents = [
+     {
+      date: '2026-01-22',
+      title: 'REIMAGINING CONSTRUCTION PARADIGMS: STEEL FOR THE NEXT GENERATION',
+      description: 
+      `The Indian Institute of Technology Indore (IITI), in association with the Institute for Steel Development and Growth (INSDAG), is pleased to invite students, researchers, faculty members, and industry professionals to a one-day Technical Seminar on:
+
+🔹 REIMAGINING CONSTRUCTION PARADIGMS: STEEL FOR THE NEXT GENERATION
+
+`,
+
+      time: '09:00 AM - 05:00 PM',
+      venue: '1D-105, IIT Indore Campus',
+      category: 'Seminar',
+      // Note: Make sure to save the image you uploaded as 'steel_seminar.jpeg' in your assets folder
+      image: '/assets/Events/steel.jpg', 
+      registrationLink: 'https://docs.google.com/forms/d/1oTXpXYolZUIVl8vKsj0q_HRgBIjvkn-NXKQ5Nc4qKCQ/edit?ts=69390ad1&pli=1' 
+    }
+  ]; 
 
   // --- Logic Section ---
 
@@ -322,15 +330,20 @@ const Events = () => {
                   <p className="text-gray-500 text-lg">No upcoming events at the moment.</p>
                 </div>
               ) : (
-                <div className="grid lg:grid-cols-2 gap-8">
+                <div className="space-y-8">
                   {filterEvents(upcomingEvents).map((event, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col">
+                   <div
+                      key={index}
+                      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col md:flex-row"
+                    >
+
                          {/* Event Image */}
-                         <div className="relative h-64 overflow-hidden">
+                         <div className="relative md:w-1/2 aspect-[210/297] bg-gray-100 flex items-center justify-center">
+
                           <img 
                             src={event.image} 
                             alt={event.title}
-                            className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-contain cursor-pointer"
                             onClick={() => setSelectedImage(event.image)}
                           />
 
@@ -342,7 +355,7 @@ const Events = () => {
                         </div>
 
                         {/* Event Details */}
-                        <div className="p-6 flex-1 flex flex-col">
+                        <div className="p-6 md:w-1/2 flex flex-col">
                             <div className="flex items-center text-blue-800 font-semibold mb-2">
                                 <Calendar className="h-5 w-5 mr-2" />
                                 <span>{formatDate(event.date)}</span>
@@ -381,27 +394,69 @@ const Events = () => {
             </div>
           )}
 
-          {/* Past Events Tab */}
-          {activeTab === 'past' && (
-            <div>
-              {filterEvents(pastEvents).length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 text-lg">No past events recorded recently.</p>
-                </div>
-              ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filterEvents(pastEvents).map((event, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100">
-                        {/* Add structure for past events when you have data */}
-                        <div className="p-4">
-                            <h3 className="font-bold">{event.title}</h3>
-                        </div>
+               {/* Past Events Tab */}
+              {activeTab === 'past' && (
+                <div>
+                  {filterEvents(pastEvents).length === 0 ? (
+                    <div className="text-center py-12">
+                      <p className="text-gray-500 text-lg">No past events recorded recently.</p>
                     </div>
-                  ))}
+                  ) : (
+                    <div className="grid lg:grid-cols-2 gap-8">
+                      {filterEvents(pastEvents).map((event, index) => (
+                        <div
+                          key={index}
+                          className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col"
+                        >
+                          {/* Event Image */}
+                          <div className="relative h-64 overflow-hidden">
+                            <img
+                              src={event.image}
+                              alt={event.title}
+                              className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
+                              onClick={() => setSelectedImage(event.image)}
+                            />
+
+                            <div className="absolute top-4 right-4">
+                              <span className="px-3 py-1 bg-gray-600 text-white rounded-full text-sm font-medium shadow-sm">
+                                {event.category}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Event Details */}
+                          <div className="p-6 flex-1 flex flex-col">
+                            <div className="flex items-center text-blue-800 font-semibold mb-2">
+                              <Calendar className="h-5 w-5 mr-2" />
+                              <span>{formatDate(event.date)}</span>
+                            </div>
+
+                            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                              {event.title}
+                            </h3>
+
+                            <div className="space-y-2 mb-4 text-gray-600">
+                              <div className="flex items-start">
+                                <Clock className="h-5 w-5 mr-2 mt-0.5 text-gray-400 flex-shrink-0" />
+                                <span>{event.time}</span>
+                              </div>
+                              <div className="flex items-start">
+                                <MapPin className="h-5 w-5 mr-2 mt-0.5 text-gray-400 flex-shrink-0" />
+                                <span>{event.venue}</span>
+                              </div>
+                            </div>
+
+                            <p className="text-gray-600 leading-relaxed border-t pt-4 border-gray-100">
+                              {event.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
-          )}
+
         </div>
       </section>
 
