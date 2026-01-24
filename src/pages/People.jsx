@@ -53,7 +53,7 @@ const People = () => {
     },
     {
       name: 'Dr. Neelima Satyam D',
-      designation: 'Institute Chair Professor',
+      designation: 'Professor (Institute Chair Professor)',
       specialization: 'Geotechnical Engineering',
       education: '',
       experience: '',
