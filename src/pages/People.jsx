@@ -15,7 +15,7 @@ const People = () => {
       education: '',
       experience: '',
       email: 'hodce@iiti.ac.in , gourabsil@iiti.ac.in',
-      phone: '0731-660 3360',
+      phone: '0731-660 3360 , +91 8268364346',
       room: '405, POD 1D',
       image: '/assets/faculty_pics/Gourab.jpg',
       research: [
