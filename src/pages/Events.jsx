@@ -16,6 +16,22 @@ const Events = () => {
 
   // 2. News Data (From your previous code)
   const newsData = [
+     {
+      date: '2026-02-15',
+      title: 'Toppers for the NPTEL course "Climate Change - Extreme Events',
+      description: 'Students from the Civil Engineering Department, Mr. Priyank Agrawal (PhD Research Scholar from my research group) and Mr. Rithwik Vardhan Akkinepally (M. Tech. WCS - 1st year student) have featured among the toppers for the NPTEL course "Climate Change - Extreme Events" offered by Prof. Somil Swarnkar, IISER Bhopal, during Jul-Oct 2025. Around 3229 students enrolled in this course and 757 registered for the exams.',
+      category: 'Achievement',
+      image: '/assets/Events/International conference/nptel_toppers.jpeg',
+      link: '',
+    },
+    {
+      date: '2025-12-20',
+      title: '2025 International Conference at NIT Rourkela',
+      description: 'Ph.D. and M. Tech. Research Scholars from our HydroInformatics Lab, Civil Engineering Department, secured several laurels at HYDRO 2025 International Conference at NIT Rourkela held during 18-20 December 2025.',
+      category: 'Achievement',
+      image: '/assets/Events/International conference/1.jpeg',
+      link: '',
+    },
     {
       date: '2025-12-06',
       title: '𝐈𝐧𝐚𝐮𝐠𝐮𝐫𝐚𝐭𝐢𝐨𝐧 𝐨𝐟 𝐭𝐡𝐞 𝐁𝐈𝐒 𝐒𝐭𝐮𝐝𝐞𝐧𝐭 𝐂𝐡𝐚𝐩𝐭𝐞𝐫 (𝐒𝐂-𝟏𝟏𝟐𝟖𝟑)',
