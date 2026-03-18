@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 
 
 import AdminFaculty from './pages/admin/AdminFaculty';
+import AdminEvents from './pages/admin/AdminEvents';
 // Public Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -59,15 +60,14 @@ function App() {
 
             {/* ADMIN ROUTES */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/faculty" element={<AdminFaculty />} />
+            
             
             {/* PROTECTED ADMIN ROUTES */}
             <Route element={<ProtectedRoute />}>
               <Route element={<AdminLayout />}>
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                {/* We will build the Faculty and Events managers next! */}
-                <Route path="/admin/faculty" element={<div className="p-8">Faculty Manager Coming Soon</div>} />
-                <Route path="/admin/events" element={<div className="p-8">Events Manager Coming Soon</div>} />
+                {/* We will build the Faculty and Events managers next! */}<Route path="/admin/faculty" element={<AdminFaculty />} />
+            <Route path="/admin/events" element={<AdminEvents />} />
                 <Route path="/admin/messages" element={<div className="p-8">Inbox Coming Soon</div>} />
               </Route>
             </Route>

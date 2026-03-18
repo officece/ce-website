@@ -42,5 +42,19 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).json({ message: 'Server Error during deletion' });
   }
 });
+// PUT /api/faculty/:id - PROTECTED (Admin edits a faculty member)
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const facultyId = parseInt(req.params.id);
+    const updatedFaculty = await prisma.faculty.update({
+      where: { id: facultyId },
+      data: req.body
+    });
+    res.json(updatedFaculty);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server Error during update' });
+  }
+});
 
 module.exports = router;
