@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- ADMIN & AUTH ---
+model Admin {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  passwordHash  String
+  createdAt     DateTime @default(now())
+}
+
+// --- DIRECTORY ---
+model Faculty {
+  id             Int      @id @default(autoincrement())
+  name           String
+  designation    String
+  specialization String
+  education      String?
+  experience     String?
+  email          String
+  phone          String?
+  room           String?
+  imageUrl       String?
+  profileUrl     String?
+  research       String[] // PostgreSQL supports string arrays natively
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  // Relations
+  projects       Project[]
+}
+
+model Staff {
+  id             Int      @id @default(autoincrement())
+  name           String
+  designation    String
+  department     String
+  email          String
+  phone          String?
+  imageUrl       String?
+  isActive       Boolean  @default(true)
+}
+
+model Student {
+  id             Int      @id @default(autoincrement())
+  name           String
+  programType    String   // 'BTech', 'MTech', 'PhD'
+  batchYear      Int?
+  email          String?
+  imageUrl       String?
+  documentUrl    String?  // For the PDF lists (BTech/MTech)
+}
+
+// --- RESEARCH & ACADEMICS ---
+model Project {
+  id             Int      @id @default(autoincrement())
+  title          String
+  piId           Int      // Foreign Key to Faculty
+  pi             Faculty  @relation(fields: [piId], references: [id])
+  status         String   // 'Ongoing', 'Completed'
+  funding        String?
+  agency         String?
+  duration       String?
+  description    String   @db.Text
+  category       String
+  collaborators  String[] 
+}
+
+model Laboratory {
+  id             Int      @id @default(autoincrement())
+  name           String
+  location       String
+  specialization String
+  headName       String?
+  area           String?
+  imageUrl       String?
+  equipments     Equipment[]
+}
+
+model Equipment {
+  id             Int      @id @default(autoincrement())
+  name           String
+  imageUrl       String?
+  labId          Int
+  laboratory     Laboratory @relation(fields: [labId], references: [id], onDelete: Cascade)
+}
+
+// --- NEWS & EVENTS ---
+model Event {
+  id               Int      @id @default(autoincrement())
+  title            String
+  date             DateTime
+  time             String?
+  venue            String?
+  description      String   @db.Text
+  category         String   // 'Seminar', 'Award', 'Workshop', etc.
+  imageUrl         String?
+  registrationLink String?
+  isNews           Boolean  @default(false) // Toggle to show in the marquee
+  createdAt        DateTime @default(now())
+}
+
+// --- PUBLIC INTERACTIONS ---
+model ContactMessage {
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String
+  subject        String
+  category       String
+  message        String   @db.Text
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}
