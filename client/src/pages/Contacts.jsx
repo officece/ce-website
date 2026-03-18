@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Users, Send, Building, Globe } from 'lucide-react';
+import { customFetch } from '../utils/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,16 +18,36 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = () => {
-    // Handle form submission
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      category: 'General Inquiry',
-      message: ''
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) throw new Error('Failed to send');
+
+      alert('Thank you for your message! We will get back to you soon.');
+      
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        category: 'General Inquiry',
+        message: ''
+      });
+    } catch (err) {
+      alert('Failed to send message. Please try again later.');
+      console.error(err);
+    }
   };
 
   const contactInfo = [

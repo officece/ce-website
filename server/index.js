@@ -15,6 +15,7 @@ app.use(express.json()); // Parses incoming JSON payloads
 app.use('/api/admin', require('./routes/authRoutes'));
 app.use('/api/faculty', require('./routes/facultyRoutes'));
 app.use('/api/events', require('./routes/eventRoutes'));
+app.use('/api/messages', require('./routes/messageRoutes'));
 
 // Basic Health Check Route
 app.get('/', (req, res) => {
